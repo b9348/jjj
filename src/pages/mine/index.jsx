@@ -5,7 +5,6 @@ import viteLogo from '/vite.svg'
 import './index.less'
 
 function App() {
-  document.title='我的'
   const [count, setCount] = useState(0)
 
   const testClick = () => {

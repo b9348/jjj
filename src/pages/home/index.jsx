@@ -1,52 +1,29 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { Button } from 'antd-mobile'
-import reactLogo from '../../assets/react.svg'
-import viteLogo from '/vite.svg'
-import './index.less'
+import {
+  useNavigate,
+} from "react-router-dom";
 
-function App() { 
-  document.title='首页'
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate('/mine');
-  };
-  const [count, setCount] = useState(0)
-
-  const testClick = () => {
-    console.log('click');
-    console.log(count);
-    setCount((count) => count + 1)
+const Index = () => {
+  const navigate = useNavigate()
+  const fallback = () => {
+    navigate("/login")
+  }
+  const logOff = () => {
+    localStorage.setItem("token", "");
+    localStorage.removeItem("token");
+    navigate("/")
   }
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button onClick={() => handleClick()} block color='primary' size='large'>
-          Block Button
-        </Button>
-        <button onClick={() => testClick()}>
-          count is {count}
-        </button>
-        count is {count}
-        <p>
-          Edit 1<code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      欢迎来到本系统
+      <br />
+      <br />
+      <div onClick={() => navigate("/mine")}>navigate(/mine)</div>
+      <br /><br />
+      <div onClick={() => fallback()}>点击登录</div>
+      <br />
+      <div onClick={() => logOff()}>注销</div>
+    </div>
   )
 }
 
-export default App
+export default Index;
