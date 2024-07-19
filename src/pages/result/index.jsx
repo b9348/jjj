@@ -4,8 +4,7 @@ import reactLogo from '../../assets/react.svg'
 import viteLogo from '/vite.svg'
 import './index.less'
 
-function App() {
-  document.title = 'result';
+function App() { 
   const [count, setCount] = useState(0)
 
   const testClick = () => {

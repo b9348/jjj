@@ -1,4 +1,7 @@
 import Home from "../pages/home"
+import Result from "../pages/result"
+import Match from "../pages/match"
+import Detail from "../pages/detail"
 import Mine from "../pages/mine"
 
 import { AppOutline, UserOutline } from "antd-mobile-icons"
@@ -9,6 +12,24 @@ export const tabs = [
         title: "首页",
         icon: <AppOutline />,
         element: <Home />,
+    },
+    {
+        key: "/result",
+        title: "结果",
+        icon: <AppOutline />,
+        element: <Result />,
+    },
+    {
+        key: "/match",
+        title: "匹配",
+        icon: <AppOutline />,
+        element: <Match />,
+    },
+    {
+        key: "/detail",
+        title: "详情",
+        icon: <AppOutline />,
+        element: <Detail />,
     },
     {
         key: "/mine",

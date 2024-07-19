@@ -1,11 +1,16 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd-mobile'
 import reactLogo from '../../assets/react.svg'
 import viteLogo from '/vite.svg'
 import './index.less'
 
-function App() {
-  document.title='我的'
+function App() { 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/mine');
+  };
   const [count, setCount] = useState(0)
 
   const testClick = () => {
@@ -23,9 +28,9 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>我的</h1>
+      <h1>Vite + React</h1>
       <div className="card">
-        <Button block color='primary' size='large'>
+        <Button onClick={() => handleClick()} block color='primary' size='large'>
           Block Button
         </Button>
         <button onClick={() => testClick()}>

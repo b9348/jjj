@@ -5,8 +5,8 @@ import reactLogo from '../../assets/react.svg'
 import viteLogo from '/vite.svg'
 import './index.less'
 
-function App() {
-  document.title = 'home';
+function App() { 
+  document.title='首页'
   const navigate = useNavigate();
 
   const handleClick = () => {

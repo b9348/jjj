@@ -4,6 +4,9 @@
   padding: 2rem;
   text-align: center;
 }
+:root:root {
+  --adm-color-primary: #00d8ff;
+}
 
 .logo {
   height: 6em;
