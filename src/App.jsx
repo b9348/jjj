@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Button } from 'antd-mobile'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -23,6 +24,9 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
+      <Button block color='primary' size='large'>
+          Block Button
+        </Button>
         <button onClick={() => testClick()}>
           count is {count}
         </button>
