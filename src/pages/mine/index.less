@@ -1,9 +1,61 @@
-.mineWrapper{
-    width: 100%;
-    height: 100vh;
+.mineWrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f3f0e6;
+}
+
+.mineUp {
+  display: flex;
+  width: 95%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.mineMid {
+  width: 95%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px 0;
+  padding: 10px 0;
+  .midBox {
+    margin: 10px 0;
+    padding: 0 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #f3f0e6;
+    transition: background-color 0.3s ease; /* 0.3秒的过渡效果，可根据需要调整时间 */
+    .midUp {
+    }
+    .midDown {
+    }
+  }
+  .midBox:active {
+    background: #ccc; /* 按下时的灰色背景 */
+  }
+}
+.mineDown {
+  border-radius: 1px;
+  border: 1px solid #ccc;
+  width: 95%;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  .mineDownList {
+    border-radius: 15px; 
+    width: 100%;
+  }
+  margin: 0 0 20px;
+}
+.mineLogout{
+    width: 95%;
 }

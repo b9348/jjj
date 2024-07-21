@@ -3,6 +3,9 @@
 :root:root {
   --adm-color-primary: #00d8ff;
 }
+body{
+  margin: 0;
+}
 
 .logo {
   height: 6em;
