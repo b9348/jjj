@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Button } from 'antd-mobile'
+import { Button, JumboTabs, List } from 'antd-mobile'
+import { NavTitle } from "../../components/navTitle";
 import reactLogo from '../../assets/react.svg'
 import viteLogo from '/vite.svg'
 import './index.less'
 
-function App() { 
+function App() {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -14,37 +15,47 @@ function App() {
   const [count, setCount] = useState(0)
 
   const testClick = () => {
-    console.log('click');
-    console.log(count);
-    setCount((count) => count + 1)
   }
+
+  const dayCount = [
+    { title: '全部', value: 0, content: '全部' },
+    { title: '今天', value: 1, content: '今天' },
+    { title: '明天', value: 2, content: '明天' },
+  ]
+  const matchInfo = [
+    { time: '2024年7月22日21:38:32', content: 'match内容A', aa: '曹叡', bb: '曹芳' },
+    { time: '2024年7月23日21:38:32', content: 'match内容B', aa: '曹叡', bb: '曹芳' },
+    { time: '2024年7月24日21:38:32', content: 'match内容C', aa: '曹叡', bb: '曹芳' },
+  ]
+
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="matchWrapper">
+      <div className="matchTitle">
+        <NavTitle title='match' />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button onClick={() => handleClick()} block color='primary' size='large'>
-          Block Button
-        </Button>
-        <button onClick={() => testClick()}>
-          count is {count}
-        </button>
-        count is {count}
-        <p>
-          Edit 1<code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="matchUp">
+        <div title='基础用法' >
+          <JumboTabs defaultActiveKey='0'>
+            {dayCount.map((item) => {
+              return <JumboTabs.Tab title={item.title} description={item.title} key={item.value}>
+                {item.content}
+              </JumboTabs.Tab>
+            })}
+          </JumboTabs>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <div className="matchDown">
+        <List>
+          {matchInfo.map((item, index) => {
+            return <List.Item title={item.time} description={item.content} key={index} clickable>
+              <li>{item.aa}</li>
+              <li>{item.bb}</li>
+            </List.Item>
+          })}
+        </List>
+
+      </div>
+    </div>
   )
 }
 

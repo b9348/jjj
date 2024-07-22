@@ -1,50 +1,26 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd-mobile'
-import reactLogo from '../../assets/react.svg'
-import viteLogo from '/vite.svg'
+import { NavTitle } from "../../components/navTitle";
 import './index.less'
 
-function App() { 
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate('/mine');
-  };
-  const [count, setCount] = useState(0)
-
-  const testClick = () => {
-    console.log('click');
-    console.log(count);
-    setCount((count) => count + 1)
-  }
+function App() {
+  const titleList = [{ title: '详情' }
+    , { title: '评论' }
+    , { title: '点赞' }
+  ]
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="detailWrapper">
+
+      <NavTitle title='详情' />
+      <div className="detailUp">
+        {titleList.map((item, index) => {
+          return <div className="detailBox" key={index}>
+            {item.title}
+          </div>
+        })}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button onClick={() => handleClick()} block color='primary' size='large'>
-          Block Button
-        </Button>
-        <button onClick={() => testClick()}>
-          count is {count}
-        </button>
-        count is {count}
-        <p>
-          Edit 1<code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 

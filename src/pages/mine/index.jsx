@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ReceivePaymentOutline, HandPayCircleOutline, FolderOutline, CalendarOutline } from 'antd-mobile-icons'
-import { Avatar, List,  Button } from 'antd-mobile'
+import { Avatar, List, Button } from 'antd-mobile'
+import { NavTitle } from "../../components/navTitle";
 import './index.less'
 
 const demoAvatarImages = [
@@ -20,6 +21,8 @@ function App() {
 
   return (
     <>
+
+      <NavTitle title='我的' />
       <div className="mineWrapper">
         <div className="mineUp">
           <List>
