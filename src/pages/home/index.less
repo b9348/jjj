@@ -6,6 +6,97 @@
 .homeSwiper {
   text-align: center;
   margin: 60px 0 0;
+  width: 95%; 
+}
+.homeBtn {
   width: 95%;
-  height: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px 0;
+  padding: 10px 0;
+  .homeBtnIcon {
+    margin: 10px 0;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease; /* 0.3秒的过渡效果，可根据需要调整时间 */
+  }
+  .homeBtnIcon:active {
+    background: #ccc; /* 按下时的灰色背景 */
+  }
+}
+
+.workingList {
+  width: 95%;
+}
+
+.workingItem {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 130px;
+  margin: 10px auto;
+  border-radius: 0 25px;
+  background-image: linear-gradient(#f1ede4, #a22624a6);
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  color: #f1ede4;
+  padding: 2% 0;
+}
+
+.workingLeft{
+  color: #000000;
+}
+
+.workingRight {
+  width: 110px;
+  height: 110px;
+  position: relative;
+}
+.workingRightTxt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  z-index: 2;
+  text-align: center;
+}
+.round1 {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: #ffffff;
+  border-radius: 50%;
+  border: 5px solid #c1726e;
+}
+.round2 {
+  top: 5px;
+  left: 5px;
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background: #ffffff;
+  border-radius: 50%;
+  border: 5px solid #d6aaa3;
+}
+.round3 {
+  top: 10px;
+  left: 10px;
+  position: absolute;
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: #ffffff;
+  border-radius: 50%;
+  border: 5px solid #c98883;
 }
