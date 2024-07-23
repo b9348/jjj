@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import { Button } from 'antd-mobile'
-import reactLogo from '../../assets/react.svg'
-import viteLogo from '/vite.svg'
+
+import { NavTitle } from "../../components/navTitle";
 import './index.less'
 
-function App() { 
+function App() {
   const [count, setCount] = useState(0)
 
   const testClick = () => {
@@ -13,32 +12,20 @@ function App() {
     setCount((count) => count + 1)
   }
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="resultWrapper">
+
+      <NavTitle title='结果' />
+      <div className="resultCount">
+        <div className="resultBox">
+          <p>总计</p>
+          <p>0.00</p>
+        </div>
+        <div className="resultBox">
+          <p>总数</p>
+          <p>0次</p>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-      <Button block color='primary' size='large'>
-          Block Button
-        </Button>
-        <button onClick={() => testClick()}>
-          count is {count}
-        </button>
-        count is {count}
-        <p>
-          Edit 1<code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
