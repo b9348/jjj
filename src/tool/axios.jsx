@@ -1,4 +1,4 @@
-import { Button, Space, Toast } from 'antd-mobile'
+import {Toast } from 'antd-mobile'
 //在index.js中引入axios
 import axios from 'axios';
 //引入qs模块，用来序列化post类型的数据
@@ -34,10 +34,26 @@ service.interceptors.response.use(
         console.log(response);
         //根据返回不同的状态码做不同的事情
         // 这里一定要和后台开发人员协商好统一的错误状态码
-        if (response.code) {
-            switch (response.code) {
+        if (response.status) {
+            switch (response.status) {
                 case 200:
-                    return response.data;
+                    Toast.show({
+                        duration: 300,
+                        icon: 'success',
+                        content: response.data.message || '成功',
+                        afterClose: () => {
+                            if (response.data.message === '登录成功') {
+                                const _user = response.data.user
+                                console.log('after')
+                                localStorage.setItem("token", "rem432412341324");
+                                localStorage.setItem("username", _user.username);
+                                localStorage.setItem("id", _user.id);
+                                localStorage.setItem("avatar", _user.avatar);
+                                window.location.href = '/';
+                            }
+                        },
+                    })
+                    break;
                 default:
                     Toast.error(response.data.msg)
             }
@@ -52,7 +68,7 @@ service.interceptors.response.use(
                 case 401:
                     Toast.show({
                         icon: 'fail',
-                        content: error.response.data.error,
+                        content: '错误！' + error.response.data.error || '',
                     })
                     break;
                 case 403:
@@ -60,8 +76,8 @@ service.interceptors.response.use(
                     break;
                 default:
                     Toast.show({
-                        content: '网络错误，请稍后再试', 
-                      })
+                        content: '网络错误，请稍后再试',
+                    })
             }
         } else {
             return Promise.reject(error);

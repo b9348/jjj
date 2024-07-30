@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { Form, Input, Button, Tabs, Toast } from "antd-mobile";
 import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
 import { NavTitle } from "../../components/navTitle";
@@ -22,10 +22,10 @@ const Loginmint = () => {
   const [loginBtnDisabled, setLoginBtnDisabled] = useState(true);
   const [signBtnDisabled, setSignBtnDisabled] = useState(true);
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const register = () => {
-    localStorage.setItem("token", "rem432412341324");
-    navigate("/")
+    // localStorage.setItem("token", "rem432412341324");
+    // navigate("/")
   }
   const phoneRegex = /^(?:(?:\+|00)86)?1[3-9]\d{9}$/;
   const pwdRegex = /^(?![\s\S]*[\s])[\w]{6,}$/
@@ -65,7 +65,7 @@ const Loginmint = () => {
     })
     const res = await logIn(obj)
     console.log(res);
-    if (res.status === 201) {
+    if (res && res.status === 201) {
       Toast.show({
         icon: 'success',
         content: res.data.message,

@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import { ReceivePaymentOutline, HandPayCircleOutline, FolderOutline, CalendarOutline } from 'antd-mobile-icons'
-import { Avatar, List, Button } from 'antd-mobile'
+import { Avatar, List, Button, Modal } from 'antd-mobile'
 import { NavTitle } from "../../components/navTitle";
 import './index.less'
 
@@ -18,7 +17,16 @@ function App() {
   const handleClick = () => {
     console.log('clicked')
   }
-
+  const localUser = (val) => {
+    return localStorage.getItem(val)
+  }
+  const logOut = () => {
+    localStorage.removeItem('username')
+    localStorage.removeItem('avatar')
+    localStorage.removeItem('token')
+    localStorage.removeItem('id')
+    window.location.href = '/'
+  }
   return (
     <>
 
@@ -27,10 +35,10 @@ function App() {
         <div className="mineUp">
           <List>
             <List.Item
-              prefix={<Avatar src={demoAvatarImages[0]} />}
-              description='Deserunt dolor ea eaque eos'
+              prefix={<Avatar src={localUser('avatar') || demoAvatarImages[0]} />}
+              description='会员'
             >
-              Novalee Spicer
+              {localUser('username') || '用户名'}
             </List.Item>
           </List>
         </div>
@@ -59,7 +67,19 @@ function App() {
             <List.Item onClick={handleClick}>关闭服务</List.Item>
           </List>
         </div>
-        <Button className='mineLogout' size='large' >退出登录</Button>
+        <Button className='mineLogout' size='large'
+          onClick={() => {
+            Modal.alert({
+              content: `确认退出登录吗？`,
+              closeOnMaskClick: true,
+              showCloseButton: true,
+              onConfirm: () => {
+                logOut()
+              },
+              confirmText: '确认',
+            })
+          }} >退出登录</Button>
+
       </div>
     </>
   )
