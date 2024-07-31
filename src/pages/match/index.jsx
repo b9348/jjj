@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, JumboTabs, List, NoticeBar } from 'antd-mobile'
 import { NavTitle } from "../../components/navTitle";
 import { getMatchList } from "../../tool/api"
+import { useGoto } from '../../tool/tool';
 import './index.less'
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
   }
 
   const dayCount = [
-    { title: '全部', value: 0, content: matchList.length ||'全部' },
+    { title: '全部', value: 0, content: matchList.length || '全部' },
     { title: '今天', value: 1, content: '今天' },
     { title: '明天', value: 2, content: '明天' },
   ]
@@ -36,6 +37,12 @@ function App() {
     { time: '2024年7月23日21:38:32', content: 'match内容B', aa: '曹叡', bb: '曹芳' },
     { time: '2024年7月24日21:38:32', content: 'match内容C', aa: '曹叡', bb: '曹芳' },
   ]
+
+  const goto = useGoto()
+  const gotoNew = (url) => {
+    goto(url)
+  }
+
 
   return (
     <div className="matchWrapper">
@@ -54,10 +61,11 @@ function App() {
           </JumboTabs>
         </div>
       </div>
-      
+
       <NoticeBar
         content='适用于当前页面内信息的通知，是一种较醒目的页面内通知方式'
         wrap
+        onClick={() => { gotoNew('/match/matchDetail') }}
         color='alert'
       />
       <div className="matchDown">
