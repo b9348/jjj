@@ -6,7 +6,7 @@ import QS from 'qs';
 
 //设置axios基础路径
 const service = axios.create({
-    baseURL: 'http://121.40.109.208/api/index'
+    baseURL: 'http://121.40.109.208/api/'
 })
 // 请求拦截器
 service.interceptors.request.use(config => {
@@ -40,7 +40,7 @@ service.interceptors.response.use(
                     Toast.show({
                         duration: 300,
                         icon: 'success',
-                        content: response.data.message || '成功',
+                        content: response.data.message || '',
                         afterClose: () => {
                             if (response.data.message === '登录成功') {
                                 const _user = response.data.user

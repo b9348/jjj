@@ -1,12 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Button, JumboTabs, List } from 'antd-mobile'
 import { NavTitle } from "../../components/navTitle";
-import reactLogo from '../../assets/react.svg'
-import viteLogo from '/vite.svg'
+import { getMatchList } from "../../tool/api"
 import './index.less'
 
 function App() {
+  useEffect(() => {
+    getMatchList().then(res => {
+      console.log(res)
+    })
+  }, [])
   const navigate = useNavigate();
 
   const handleClick = () => {
