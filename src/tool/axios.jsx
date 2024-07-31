@@ -31,7 +31,7 @@ service.interceptors.request.use(config => {
 // 响应拦截器
 service.interceptors.response.use(
     response => {
-        console.log(response);
+        // console.log(response);
         //根据返回不同的状态码做不同的事情
         // 这里一定要和后台开发人员协商好统一的错误状态码
         if (response.status) {
@@ -53,7 +53,7 @@ service.interceptors.response.use(
                             }
                         },
                     })
-                    break;
+                    return response.data
                 default:
                     Toast.error(response.data.msg)
             }

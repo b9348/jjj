@@ -1,16 +1,21 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Button, JumboTabs, List } from 'antd-mobile'
+import { Button, JumboTabs, List, NoticeBar } from 'antd-mobile'
 import { NavTitle } from "../../components/navTitle";
 import { getMatchList } from "../../tool/api"
 import './index.less'
 
 function App() {
+  const [matchList, setMatchList] = useState([])
   useEffect(() => {
-    getMatchList().then(res => {
-      console.log(res)
-    })
-  }, [])
+    const fetchData = async () => {
+      const res = await getMatchList();
+      console.log(res);
+      setMatchList(res.data);
+    };
+    fetchData();
+  }, []);
+
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -22,7 +27,7 @@ function App() {
   }
 
   const dayCount = [
-    { title: '全部', value: 0, content: '全部' },
+    { title: '全部', value: 0, content: matchList.length ||'全部' },
     { title: '今天', value: 1, content: '今天' },
     { title: '明天', value: 2, content: '明天' },
   ]
@@ -38,22 +43,29 @@ function App() {
         <NavTitle title='match' />
       </div>
       <div className="matchUp">
-        <div title='基础用法' >
+        <div title='日期切换' >
           <JumboTabs defaultActiveKey='0'>
             {dayCount.map((item) => {
-              return <JumboTabs.Tab title={item.title} description={item.title} key={item.value}>
-                {item.content}
+              return <JumboTabs.Tab title={item.title} description={item.content} key={item.value}>
+                {/* {item.content} */}
+                {/* {`共计:${matchList.length}` } */}
               </JumboTabs.Tab>
             })}
           </JumboTabs>
         </div>
       </div>
+      
+      <NoticeBar
+        content='适用于当前页面内信息的通知，是一种较醒目的页面内通知方式'
+        wrap
+        color='alert'
+      />
       <div className="matchDown">
         <List>
-          {matchInfo.map((item, index) => {
-            return <List.Item title={item.time} description={item.content} key={index} clickable>
-              <li>{item.aa}</li>
-              <li>{item.bb}</li>
+          {matchList.map((item, index) => {
+            return <List.Item title={item.start_time} description={item.match_name} key={index} clickable>
+              <li>{item.term_a}</li>
+              <li>{item.term_b}</li>
             </List.Item>
           })}
         </List>
