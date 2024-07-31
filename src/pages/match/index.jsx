@@ -8,6 +8,7 @@ import './index.less'
 
 function App() {
   const [matchList, setMatchList] = useState([])
+  const [activeKey, setActiveKey] = useState(0)
   useEffect(() => {
     const fetchData = async () => {
       const res = await getMatchList();
@@ -42,6 +43,12 @@ function App() {
   const gotoNew = (url) => {
     goto(url)
   }
+  const changeTab = async (key) => {
+    let _val  
+    setActiveKey(key)
+    const res = await getMatchList( '',key );
+    console.log(res);
+  }
 
 
   return (
@@ -51,7 +58,7 @@ function App() {
       </div>
       <div className="matchUp">
         <div title='日期切换' >
-          <JumboTabs defaultActiveKey='0'>
+          <JumboTabs onChange={(key) => { changeTab(key) }} defaultActiveKey='0'>
             {dayCount.map((item) => {
               return <JumboTabs.Tab title={item.title} description={item.content} key={item.value}>
                 {/* {item.content} */}
@@ -65,13 +72,15 @@ function App() {
       <NoticeBar
         content='适用于当前页面内信息的通知，是一种较醒目的页面内通知方式'
         wrap
-        onClick={() => { gotoNew('/match/matchDetail') }}
         color='alert'
       />
       <div className="matchDown">
         <List>
           {matchList.map((item, index) => {
-            return <List.Item title={item.start_time} description={item.match_name} key={index} clickable>
+            return <List.Item title={item.start_time} description={item.match_name}
+
+              onClick={() => { gotoNew('/match/matchDetail') }}
+              key={index} clickable>
               <li>{item.term_a}</li>
               <li>{item.term_b}</li>
             </List.Item>
