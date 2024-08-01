@@ -14,6 +14,51 @@
       box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
     }
   }
+  .matchInfo {
+    font-size: 24px;
+    width: 100%;
+    position: absolute;
+    color: #f3f0e6;
+    text-align: center;
+    .matchTitle {
+      margin: 10px 0;
+      font-weight: 600;
+    }
+    .matchContent {
+      font-weight: 300;
+      word-wrap: break-word;
+      font-size: 18px;
+      padding: 5px 0 16px;
+      display: flex;
+      justify-content: space-around;
+      word-wrap: break-word;
+      text-align: center;
+      .left {
+        width: 40%;
+        display: flex;
+        justify-content: center; 
+        align-items: flex-start;
+      }
+      .vs {
+        padding: 20px 0 0;
+        width: 32px;
+        span {
+          font-size: 24px;
+          border-radius: 50%;
+          border: 1px solid #ccc;
+        }
+      }
+      .right {
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+    }
+    .matchTime {
+      font-size: 15px;
+    }
+  }
 }
 .popContent {
   padding: 10px;
@@ -82,7 +127,6 @@
     width: 95%;
     .popConfirmBtn {
       width: 100%;
-      
     }
   }
 }

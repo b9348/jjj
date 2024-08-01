@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavBar, List, Popup, Button, Toast, Input, Footer } from 'antd-mobile'
 
-import { getMatchDetail ,getMatch} from '../../../tool/api';
+import { getMatchDetail, getMatch } from '../../../tool/api';
 import { getUrlParams } from '../../../tool/tool';
 import './index.less';
 const currentUrlParams = getUrlParams(window.location.href);
@@ -17,7 +17,7 @@ const matchDetail = () => {
         const fetchDetail = async () => {
             const res1 = await getMatchDetail(currentUrlParams);
             const res2 = await getMatch(currentUrlParams);
-            console.log(res1.data,res2.data);
+            console.log(res1.data, res2.data);
             setUsers(res1.data);
             setMatchInfo(res2.data)
         }
@@ -41,6 +41,20 @@ const matchDetail = () => {
                 列表详情
             </NavBar>
 
+            <div className="matchInfo">
+                <div className="matchTitle">
+                    {matchInfo.match_name}
+                </div>
+                <div className="matchContent">
+                    <div className="left">{matchInfo.term_a}</div>
+                    <div className="vs"><span>𝙑𝙎</span></div>
+                    <div className="right">{matchInfo.term_b}</div>
+                      
+                </div>
+                <div className="matchTime">
+                    {matchInfo.start_time}
+                </div>
+            </div>
             <img className="detailImg" src="https://ue5933.cn/static/footer/qiubg.jpg" alt="" />
 
             <List className='list' header='bogdan' mode='card'>
