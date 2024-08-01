@@ -41,9 +41,10 @@ const matchDetail = () => {
 
             <img className="detailImg" src="https://ue5933.cn/static/footer/qiubg.jpg" alt="" />
 
-            <List header='bogdan' mode='card'>
+            <List className='list' header='bogdan' mode='card'>
                 {users.map(user => (
                     <List.Item
+                    className='listItem'
                         clickable
                         extra='无限制'
                         key={user.id}
