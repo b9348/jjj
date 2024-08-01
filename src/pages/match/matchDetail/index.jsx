@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavBar, List, Popup, Button, Toast, Input } from 'antd-mobile'
+import { NavBar, List, Popup, Button, Toast, Input, Footer } from 'antd-mobile'
 
 import { NavTitle } from "../../../components/navTitle";
 import { getMatchDetail } from '../../../tool/api';
@@ -128,6 +128,7 @@ const matchDetail = () => {
             </>
 
 
+            <Footer label='没有更多了'></Footer>
         </div>
     )
 }
