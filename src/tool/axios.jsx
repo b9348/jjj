@@ -1,4 +1,4 @@
-import {Toast } from 'antd-mobile'
+import { Toast } from 'antd-mobile'
 //在index.js中引入axios
 import axios from 'axios';
 //引入qs模块，用来序列化post类型的数据
@@ -54,8 +54,31 @@ service.interceptors.response.use(
                         },
                     })
                     return response.data
+                case 201:
+                    Toast.show({
+                        duration: 1500,
+                        icon: 'success',
+                        content: response.data.message || '',
+                        afterClose: () => {
+                            if (response.data.message === '注册成功') {
+                                const _user = response.data.user
+                                console.log('after')
+                                localStorage.setItem("token", "rem432412341324");
+                                localStorage.setItem("username", _user.username);
+                                localStorage.setItem("id", _user.id);
+                                localStorage.setItem("avatar", _user.avatar);
+                                window.location.href = '/';
+                            }
+                        },
+                    })
+
+                    return response.data
                 default:
-                    Toast.error(response.data.msg)
+                    Toast.show({
+                        icon: 'fail',
+                        content: response.data.error || response.data.message || '网络错误',
+                    })
+                    return response?.data
             }
         } else {
             return response;
@@ -65,10 +88,11 @@ service.interceptors.response.use(
         // 错误处理逻辑
         if (error) {
             switch (error.response.status) {
-                case 401:
+                case 400:
                     Toast.show({
+                        duration: 1000,
                         icon: 'fail',
-                        content: '错误！' + error.response.data.error || '',
+                        content: error.response.data.error || error.response.data.message || '请求错误',
                     })
                     break;
                 case 403:

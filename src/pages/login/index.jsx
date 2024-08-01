@@ -64,14 +64,7 @@ const Loginmint = () => {
       content: '加载中…',
     })
     const res = await logIn(obj)
-    console.log(res);
-    if (res && res.status === 201) {
-      Toast.show({
-        icon: 'success',
-        content: res.data.message,
-      })
-    }
-    console.log("signup", signId, signPwd);
+    console.log(res); 
   }
   const handleSign = async () => {
     const obj = {}
@@ -82,13 +75,7 @@ const Loginmint = () => {
       content: '加载中…',
     })
     const res = await signUp(obj)
-    console.log(res);
-    if (res.status === 201) {
-      Toast.show({
-        icon: 'success',
-        content: res.data.message + '，请登录',
-      })
-    }
+    console.log(res); 
     console.log("signup", signId, signPwd);
   }
   const loginPwdCheck = (e) => {
