@@ -20,5 +20,10 @@ export const getMatchList = (match_name, today) => {
 
     return service.get(url);
 };
+export const getMatch = ({match_id}) => {
+    console.log(match_id);
+    let url = '/match/getMatch';
+    return service.get(`${url}?match_id=${match_id}`);
+};
 
 export const getMatchDetail = info => service.post(`/invest/getList`, info); 

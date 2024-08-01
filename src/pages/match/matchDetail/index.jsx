@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavBar, List, Popup, Button, Toast, Input, Footer } from 'antd-mobile'
 
-import { NavTitle } from "../../../components/navTitle";
-import { getMatchDetail } from '../../../tool/api';
+import { getMatchDetail ,getMatch} from '../../../tool/api';
 import { getUrlParams } from '../../../tool/tool';
 import './index.less';
 const currentUrlParams = getUrlParams(window.location.href);
@@ -13,11 +12,14 @@ const matchDetail = () => {
     const [cost, setCost] = useState('')
     const [profit, setProfit] = useState(0)
     const [preProfit, setPreProfit] = useState(0)
+    const [matchInfo, setMatchInfo] = useState({})
     useEffect(() => {
         const fetchDetail = async () => {
-            const res = await getMatchDetail(currentUrlParams);
-            console.log(res);
-            setUsers(res.data);
+            const res1 = await getMatchDetail(currentUrlParams);
+            const res2 = await getMatch(currentUrlParams);
+            console.log(res1.data,res2.data);
+            setUsers(res1.data);
+            setMatchInfo(res2.data)
         }
         fetchDetail();
     }, [])
