@@ -75,9 +75,11 @@ function App() {
         color='alert'
       />
       <div className="matchDown">
-        <List>
+        <List mode='card' className="matchList">
           {matchList.map((item, index) => {
-            return <List.Item title={item.start_time} description={item.match_name}
+            return <List.Item
+            className='matchListItem'
+            title={item.start_time} description={item.match_name}
 
               onClick={() => { gotoNew('/match/matchDetail', item.id) }}
               key={index} clickable>
