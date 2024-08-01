@@ -20,3 +20,5 @@ export const getMatchList = (match_name, today) => {
 
     return service.get(url);
 };
+
+export const getMatchDetail = info => service.post(`/invest/getList`, info); 
