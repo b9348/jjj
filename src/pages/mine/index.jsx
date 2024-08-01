@@ -1,13 +1,14 @@
 import { ReceivePaymentOutline, HandPayCircleOutline, FolderOutline, CalendarOutline } from 'antd-mobile-icons'
 import { Avatar, List, Button, Modal } from 'antd-mobile'
 import { NavTitle } from "../../components/navTitle";
+import { useGoto } from '../../tool/tool';
 import './index.less'
 
 const demoAvatarImages = [
   'https://images.unsplash.com/photo-1548532928-b34e3be62fc6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
 ]
 const midList = [
-  { icon: ReceivePaymentOutline, content: '测试1' },
+  { icon: ReceivePaymentOutline, content: '测试1', url: '/mine/charge' },
   { icon: HandPayCircleOutline, content: '测试2' },
   { icon: FolderOutline, content: '测试3' },
   { icon: CalendarOutline, content: '测试4' },
@@ -27,6 +28,10 @@ function App() {
     localStorage.removeItem('id')
     window.location.href = '/'
   }
+  const goto = useGoto()
+  const openUrl = (url) => {
+    goto(url)
+  }
   return (
     <>
 
@@ -45,7 +50,7 @@ function App() {
         <div className="mineMid">
           {midList.map((item, index) => {
             return <div className="midBox"
-              key={index} onClick={() => { console.log(item.content) }}>
+              key={index} onClick={() => { openUrl(item.url) }}>
               <item.icon fontSize={40} />
               <div className="midDown">
                 {item.content}

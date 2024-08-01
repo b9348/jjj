@@ -3,9 +3,9 @@ import { NavBar, List, Popup, Button, Toast, Input, Footer } from 'antd-mobile'
 
 import { NavTitle } from "../../../components/navTitle";
 import { getMatchDetail } from '../../../tool/api';
-
+import { getUrlParams } from '../../../tool/tool';
 import './index.less';
-
+const currentUrlParams = getUrlParams(window.location.href);
 const matchDetail = () => {
     const [users, setUsers] = useState([]);
     const [visible, setVisible] = useState(false)
@@ -15,7 +15,7 @@ const matchDetail = () => {
     const [preProfit, setPreProfit] = useState(0)
     useEffect(() => {
         const fetchDetail = async () => {
-            const res = await getMatchDetail({ match_id: 1 });
+            const res = await getMatchDetail(currentUrlParams);
             console.log(res);
             setUsers(res.data);
         }
@@ -44,7 +44,7 @@ const matchDetail = () => {
             <List className='list' header='bogdan' mode='card'>
                 {users.map(user => (
                     <List.Item
-                    className='listItem'
+                        className='listItem'
                         clickable
                         extra='无限制'
                         key={user.id}
@@ -60,7 +60,7 @@ const matchDetail = () => {
                     showCloseButton
                     visible={visible}
                     onMaskClick={() => {
-                        setVisible(false),setCost(0)
+                        setVisible(false), setCost(0)
                     }}
                     onClose={() => {
                         setVisible(false), setCost(0)

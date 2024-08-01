@@ -40,13 +40,13 @@ function App() {
   ]
 
   const goto = useGoto()
-  const gotoNew = (url) => {
-    goto(url)
+  const gotoNew = (url, match_id) => {
+    goto(`${url}?match_id=${match_id}`)
   }
   const changeTab = async (key) => {
-    let _val  
+    let _val
     setActiveKey(key)
-    const res = await getMatchList( '',key );
+    const res = await getMatchList('', key);
     console.log(res);
   }
 
@@ -79,7 +79,7 @@ function App() {
           {matchList.map((item, index) => {
             return <List.Item title={item.start_time} description={item.match_name}
 
-              onClick={() => { gotoNew('/match/matchDetail') }}
+              onClick={() => { gotoNew('/match/matchDetail', item.id) }}
               key={index} clickable>
               <li>{item.term_a}</li>
               <li>{item.term_b}</li>
