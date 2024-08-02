@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { NavBar, List, Popup, Button, Toast, Input, Footer } from 'antd-mobile'
+import { NavBar, List, Popup, Button, Toast, Input, Footer, DotLoading } from 'antd-mobile'
 
 import { getMatchDetail, getMatch, apiBuy } from '../../../tool/api';
 import { getUrlParams } from '../../../tool/tool';
 import './index.less';
-const currentUrlParams = getUrlParams(window.location.href);
 const matchDetail = () => {
+    const currentUrlParams = getUrlParams(window.location.href);
     const [users, setUsers] = useState([]);
     const [visible, setVisible] = useState(false)
     const [tips, setTips] = useState('')
@@ -13,6 +13,7 @@ const matchDetail = () => {
     const [profit, setProfit] = useState(0)
     const [preProfit, setPreProfit] = useState(0)
     const [matchInfo, setMatchInfo] = useState({})
+    const [loading, setLoading] = useState(true)
     useEffect(() => {
         const fetchDetail = async () => {
             const res1 = await getMatchDetail(currentUrlParams);
@@ -20,6 +21,7 @@ const matchDetail = () => {
             console.log(res1.data, res2.data);
             setUsers(res1.data);
             setMatchInfo(res2.data)
+            setLoading(false)
         }
         fetchDetail();
     }, [])
@@ -33,6 +35,24 @@ const matchDetail = () => {
         setTips(profit)
         setProfit(Number(profit.replace('%', '')))
     }
+    const buy = async () => {
+        const userId = localStorage.getItem('id');
+        const info = {
+            user_id: userId,
+            moment: cost,
+            match_id: currentUrlParams.match_id,
+            options: matchInfo.options,
+        }
+        const res = await apiBuy(info);
+        console.log(res);
+        if (res.code === 200) {
+            Toast.success('购买成功', 1);
+            setVisible(false)
+            setCost(0)
+        } else {
+            Toast.fail('购买失败', 1);
+        }
+    }
 
 
     return (
@@ -41,7 +61,7 @@ const matchDetail = () => {
                 列表详情
             </NavBar>
 
-            <div className="matchInfo">
+            {loading ? <DotLoading /> : <div className="matchInfo">
                 <div className="matchTitle">
                     {matchInfo.match_name}
                 </div>
@@ -54,7 +74,7 @@ const matchDetail = () => {
                 <div className="matchTime">
                     {matchInfo.start_time}
                 </div>
-            </div>
+            </div>}
             <img className="detailImg" src="https://ue5933.cn/static/footer/qiubg.jpg" alt="" />
 
             <List className='list' header='bogdan' mode='card'>
@@ -135,7 +155,7 @@ const matchDetail = () => {
                         <div className="popConfirm">
                             <Button className='popConfirmBtn' type='primary'
                                 color='primary'
-                                onClick={() => { }} >
+                                onClick={() => { buy() }} >
                                 确认
                             </Button>
                         </div>
