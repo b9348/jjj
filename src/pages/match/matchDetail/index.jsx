@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavBar, List, Popup, Button, Toast, Input, Footer } from 'antd-mobile'
 
-import { getMatchDetail, getMatch } from '../../../tool/api';
+import { getMatchDetail, getMatch, apiBuy } from '../../../tool/api';
 import { getUrlParams } from '../../../tool/tool';
 import './index.less';
 const currentUrlParams = getUrlParams(window.location.href);
@@ -49,7 +49,7 @@ const matchDetail = () => {
                     <div className="left">{matchInfo.term_a}</div>
                     <div className="vs"><span>𝙑𝙎</span></div>
                     <div className="right">{matchInfo.term_b}</div>
-                      
+
                 </div>
                 <div className="matchTime">
                     {matchInfo.start_time}
