@@ -13,6 +13,12 @@ const midList = [
   { icon: FolderOutline, content: '测试3' },
   { icon: CalendarOutline, content: '测试4' },
 ]
+const mineServices = [
+  {content: '资金明细', extra: '查看流水', url: '/mine/costDetails' },
+  {content: '储值记录', extra: '查看充值记录', url: '/mine/chargeRecords' },
+  {content: '联系客服' , extra: '咨询官方客服' },
+  {content: '比赛记录', extra: '查看过往赛事结果', url: '/mine/matchRecords' },  
+]
 
 function App() {
   const handleClick = () => {
@@ -38,7 +44,7 @@ function App() {
       <NavTitle title='我的' />
       <div className="mineWrapper">
         <div className="mineUp">
-          <List>
+          <List style={{ width: '100%' }}>
             <List.Item
               prefix={<Avatar src={localUser('avatar') || demoAvatarImages[0]} />}
               description='会员'
@@ -60,17 +66,14 @@ function App() {
           })}
         </div>
         <div className="mineDown">
-
           <List className='mineDownList'>
-            <List.Item extra='按照支付设置的顺序扣款' onClick={handleClick}>
-              扣款方式
-            </List.Item>
-            <List.Item extra='200元' onClick={handleClick}>
-              月限额
-            </List.Item>
-            <List.Item onClick={handleClick}>帮助中心</List.Item>
-            <List.Item onClick={handleClick}>关闭服务</List.Item>
+            {mineServices.map((item, index) => {
+              return <List.Item key={index} extra={item.extra} onClick={() => { openUrl(item.url) }}>
+                {item.content}
+              </List.Item>
+            })}
           </List>
+
         </div>
         <Button className='mineLogout' size='large'
           onClick={() => {

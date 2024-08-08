@@ -42,6 +42,9 @@ const matchDetail = () => {
             moment: cost,
             match_id: currentUrlParams.match_id,
             options: matchInfo.options,
+            rate: profit * 0.01,
+            predict_rate: preProfit,
+
         }
         const res = await apiBuy(info);
         console.log(res);
@@ -75,7 +78,7 @@ const matchDetail = () => {
                     {matchInfo.start_time}
                 </div>
             </div>}
-            <img className="detailImg" src="https://ue5933.cn/static/footer/qiubg.jpg" alt="" />
+            <img className="detailImg" src="https://ts1.cn.mm.bing.net/th/id/R-C.a258d340510ee42d72f1e672a4eeced3?rik=DdqlC0xl0J18tg&riu=http%3a%2f%2fimg.netbian.com%2ffile%2f20110223%2f84b6e00fd9a42303f8ce9646060a7f99.jpg&ehk=hVvRHFTaUnfBzccL0uoX7vvQjH5qB0howflhJDlWqm8%3d&risl=&pid=ImgRaw&r=0" alt="" />
 
             <List className='list' header='bogdan' mode='card'>
                 {users.map(user => (
@@ -114,9 +117,9 @@ const matchDetail = () => {
                         </div>
                         <div className="popBox">
                             <div className="top">
-                                <span>number</span>
-                                <span>get</span>
-                                <span>will</span>
+                                <span>交易金额</span>
+                                <span>获利</span>
+                                <span>预计</span>
                             </div>
                             <div className="mid">
                                 <Input

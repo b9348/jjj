@@ -3,8 +3,11 @@ import Login from "../pages/login";
 import RouteGuard from "./routeGuard";
 import { TabBar } from "antd-mobile";
 import { tabs } from "./tabs"
-import matchDetail from "../pages/match/matchDetail";    // 匹配详情页面
-import charge from "../pages/mine/charge";        // 匹配列表页面
+import matchDetail from "../pages/match/matchDetail";    // 赛事详情页面
+import charge from "../pages/mine/charge";        // 充值页面
+import chargeRecords from "../pages/mine/chargeRecords";    // 充值记录页面
+import costDetails from "../pages/mine/costDetails";    // 充值记录页面
+
 
 import { Helmet } from "react-helmet";
 import "./router.less"
@@ -14,6 +17,8 @@ const AppRouter = () => {
     const pages = {
         '/match/matchDetail': matchDetail,
         '/mine/charge': charge,
+        '/mine/chargeRecords': chargeRecords,
+        '/mine/costDetails': costDetails,
     }
 
     const location = useLocation();
