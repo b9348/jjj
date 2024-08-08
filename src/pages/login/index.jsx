@@ -61,10 +61,27 @@ const Loginmint = () => {
     obj.password = loginPwd
     Toast.show({
       icon: 'loading',
-      content: '加载中…',
+      content: '登录中…',
     })
     const res = await logIn(obj)
-    console.log(res); 
+    console.log(res);
+    if (res.message === "登录成功") {
+      Toast.show({
+        duration: 300,
+        icon: 'success',
+        content: res.message,
+        afterClose: () => {
+          const _user = res.user
+          console.log('after')
+          localStorage.setItem("token", "rem432412341324");
+          localStorage.setItem("username", _user.username);
+          localStorage.setItem("id", _user.id);
+          localStorage.setItem("avatar", _user.avatar);
+          window.location.href = '/';
+
+        },
+      })
+    }
   }
   const handleSign = async () => {
     const obj = {}
@@ -72,10 +89,10 @@ const Loginmint = () => {
     obj.password = signPwd
     Toast.show({
       icon: 'loading',
-      content: '加载中…',
+      content: '注册中…',
     })
     const res = await signUp(obj)
-    console.log(res); 
+    console.log(res);
     console.log("signup", signId, signPwd);
   }
   const loginPwdCheck = (e) => {

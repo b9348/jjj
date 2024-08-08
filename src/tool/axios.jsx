@@ -37,22 +37,6 @@ service.interceptors.response.use(
         if (response.status) {
             switch (response.status) {
                 case 200:
-                    Toast.show({
-                        duration: 300,
-                        icon: 'success',
-                        content: response.data.message || '',
-                        afterClose: () => {
-                            if (response.data.message === '登录成功') {
-                                const _user = response.data.user
-                                console.log('after')
-                                localStorage.setItem("token", "rem432412341324");
-                                localStorage.setItem("username", _user.username);
-                                localStorage.setItem("id", _user.id);
-                                localStorage.setItem("avatar", _user.avatar);
-                                window.location.href = '/';
-                            }
-                        },
-                    })
                     return response.data
                 case 201:
                     Toast.show({
@@ -74,10 +58,10 @@ service.interceptors.response.use(
 
                     return response.data
                 default:
-                    Toast.show({
-                        icon: 'fail',
-                        content: response.data.error || response.data.message || '网络错误',
-                    })
+                    // Toast.show({
+                    //     icon: 'fail',
+                    //     content: response.data.error || response.data.message || '网络错误',
+                    // })
                     return response?.data
             }
         } else {

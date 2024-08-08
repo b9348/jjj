@@ -14,6 +14,7 @@ const matchDetail = () => {
     const [preProfit, setPreProfit] = useState(0)
     const [matchInfo, setMatchInfo] = useState({})
     const [loading, setLoading] = useState(true)
+    const [investId, setInvestId] = useState('')
     useEffect(() => {
         const fetchDetail = async () => {
             const res1 = await getMatchDetail(currentUrlParams);
@@ -29,8 +30,9 @@ const matchDetail = () => {
         setPreProfit(Math.round(((cost * (profit * 0.01)) * 0.95) * 100) / 100)
     }, [cost])
 
-    const callModal = (profit) => {
+    const callModal = (profit, investId) => {
         console.log('callModal');
+        setInvestId(investId)
         setVisible(!visible)
         setTips(profit)
         setProfit(Number(profit.replace('%', '')))
@@ -41,19 +43,27 @@ const matchDetail = () => {
             user_id: userId,
             moment: cost,
             match_id: currentUrlParams.match_id,
-            options: matchInfo.options,
+            invest_id: investId,
             rate: profit * 0.01,
             predict_rate: preProfit,
 
         }
         const res = await apiBuy(info);
         console.log(res);
-        if (res.code === 200) {
-            Toast.success('购买成功', 1);
+        if (res.code === 0) {
+            console.log(res.msg);
+            console.log(res.msg[0]);
+            Toast.show({
+                icon: 'success',
+                content: res.msg[0],
+            })
             setVisible(false)
             setCost(0)
         } else {
-            Toast.fail('购买失败', 1);
+            Toast.show({
+                icon: 'fail',
+                content: res.msg || '请求失败',
+            })
         }
     }
 
@@ -88,7 +98,7 @@ const matchDetail = () => {
                         extra='无限制'
                         key={user.id}
                         description={`预计： ${user.profit}`}
-                        onClick={() => { callModal(user.profit) }}
+                        onClick={() => { callModal(user.profit, user.options) }}
                     >
                         选项：{user.options}
                     </List.Item>
