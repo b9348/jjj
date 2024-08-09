@@ -28,6 +28,8 @@ export const getMatch = ({ match_id }) => {
 
 export const getMatchDetail = info => service.post(`/invest/getList`, info);
 export const apiBuy = info => service.post(`/order/buy`, info);
+export const charge = info => service.post(`/order/charge`, info);
+export const queryCharges = userId => service.get(`/order/getCharge?user_id=${userId}`);
 // user_id
 // moment 下单金额
 // invest_id  投资id

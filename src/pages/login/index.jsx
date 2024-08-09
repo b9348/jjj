@@ -217,7 +217,7 @@ const Loginmint = () => {
               </div>
 
               <p className="signTips">{signTips}</p>
-              <Button className="signBtn" type='primary' color="primary"
+              <Button className="signBtn" block type='primary' color="primary"
                 disabled={signBtnDisabled} onClick={() => { handleSign() }}>注册</Button>
             </Tabs.Tab>
           </Tabs>
