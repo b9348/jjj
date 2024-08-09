@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Button, Grid, List, Image, Tag, Footer } from 'antd-mobile'
+import { Button, Grid, List, Image, Tag, Footer,Space } from 'antd-mobile'
 import { NavTitle } from "../../components/navTitle";
 import { queryDetails } from '../../tool/api'
 import './index.less'
@@ -22,23 +22,25 @@ function App() {
   return (
     <div className="detailWrapper">
       <NavTitle title='资金详情' />
-      <div className="detailUp">
+      {/* <div className="detailUp">
         {titleList.map((item, index) => {
           return <div className="detailBox" key={index}>
             {item.title}
           </div>
         })}
-      </div>
+      </div> */}
+      <br /><br /><br />
+      <Space/>
       <div className="detailDown">
 
         <List header='资金去向详情列表'>
           {costDetails.map((val, index) => (
             <List.Item
               key={index}
-              title={val.createtime}
-              description={val.desc}
+              title={`时间：${val.createtime}`}
+              description={`资金类型：${val.desc}`}
             >
-              <Tag color='primary' fill='outline'>下注
+              <Tag color='primary' fill='outline'>下注金额
               </Tag>：
                 {val.moment}
             </List.Item>
