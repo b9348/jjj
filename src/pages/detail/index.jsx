@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react' 
-import { Button, Grid , List, Image } from 'antd-mobile'
+import { useState, useEffect } from 'react'
+import { Button, Grid, List, Image, Tag, Footer } from 'antd-mobile'
 import { NavTitle } from "../../components/navTitle";
 import { queryDetails } from '../../tool/api'
 import './index.less'
@@ -30,19 +30,23 @@ function App() {
         })}
       </div>
       <div className="detailDown">
-        
-    <List header='用户列表'>
-      {costDetails.map((val, index) => (
-        <List.Item
-          key={ index }
-          title ={val.createtime}
-          description={val.desc}
-        >
-          {val.moment}
-        </List.Item>
-      ))}
-    </List>
+
+        <List header='资金去向详情列表'>
+          {costDetails.map((val, index) => (
+            <List.Item
+              key={index}
+              title={val.createtime}
+              description={val.desc}
+            >
+              <Tag color='primary' fill='outline'>下注
+              </Tag>：
+                {val.moment}
+            </List.Item>
+          ))}
+        </List>
       </div>
+      
+      <Footer label='没有更多了' />
     </div>
   )
 }

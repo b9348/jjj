@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Button, JumboTabs, List, NoticeBar } from 'antd-mobile'
+import { Button, JumboTabs, List, NoticeBar, Footer } from 'antd-mobile'
 import { NavTitle } from "../../components/navTitle";
 import { getMatchList } from "../../tool/api"
 import { useGoto } from '../../tool/tool';
@@ -78,8 +78,8 @@ function App() {
         <List mode='card' className="matchList">
           {matchList.map((item, index) => {
             return <List.Item
-            className='matchListItem'
-            title={item.start_time} description={item.match_name}
+              className='matchListItem'
+              title={item.start_time} description={item.match_name}
 
               onClick={() => { gotoNew('/match/matchDetail', item.id) }}
               key={index} clickable>
@@ -90,6 +90,8 @@ function App() {
         </List>
 
       </div>
+
+      <Footer style={{ backgroundColor:'#f3f0e6'}} label='没有更多了' />
     </div>
   )
 }

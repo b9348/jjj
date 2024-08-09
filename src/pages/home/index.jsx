@@ -145,7 +145,7 @@ function App() {
         </div>
       </div>
 
-      <Footer label='没有更多了'></Footer>
+      <Footer label='没有更多了'/>
     </div>
   )
 }
