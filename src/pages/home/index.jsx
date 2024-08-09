@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Swiper, Toast, NoticeBar, Footer, Popup, Button, Space } from 'antd-mobile'
 import { ReceivePaymentOutline, HandPayCircleOutline, SmileOutline, SoundOutline } from 'antd-mobile-icons'
 import { NavTitle } from "../../components/navTitle";
+import { useGoto } from '../../tool/tool';
 import './index.less'
 
 const colors = ['#ace0ff', '#bcffbd', '#e4fabd', '#ffcfac']
@@ -24,13 +25,17 @@ const items = colors.map((color, index) => (
 
 
 const homeBtnList = [
-  { icon: ReceivePaymentOutline, content: '测试1' },
-  { icon: HandPayCircleOutline, content: '测试2' },
+  { icon: ReceivePaymentOutline, content: '充值', url: '/mine/charge' },
+  { icon: HandPayCircleOutline, content: '提现' },
   { icon: SmileOutline, content: '测试3' },
   { icon: SoundOutline, content: '公告' },
 ]
 
 function App() {
+  const goto = useGoto()
+  const openUrl = (url) => {
+    goto(url)
+  }
   const [count, setCount] = useState(0)
 
   const [visible1, setVisible1] = useState(false)
@@ -69,7 +74,7 @@ function App() {
       <div className="homeBtn">
         {homeBtnList.map((item, index) => {
           return <div className="homeBtnIcon"
-            key={index} onClick={() => { testClick(item.content) }}>
+            key={index} onClick={() => { openUrl(item.url) }}>
             <item.icon fontSize={40} />
             <div className="homtBtnTxt">
               {item.content}
@@ -84,7 +89,7 @@ function App() {
           }}
           bodyStyle={{ height: '40vh', overflowY: 'scroll' }}
         >
-          <div style={{ padding: '24px' ,overflowY: 'scroll' }}>
+          <div style={{ padding: '24px', overflowY: 'scroll' }}>
             <Space direction='vertical'>
               <Button
                 onClick={() => {
@@ -93,7 +98,7 @@ function App() {
               >
                 展开第二个弹出层
               </Button>
-              
+
               <div>11</div>
             </Space>
           </div>
@@ -105,8 +110,8 @@ function App() {
           }}
           bodyStyle={{ height: '30vh', overflowY: 'scroll', padding: '20px 0' }}
         >
-          <div style={{   overflowY: 'scroll', padding: '20px' }}>
-          22
+          <div style={{ overflowY: 'scroll', padding: '20px' }}>
+            22
           </div>
         </Popup>
       </div>

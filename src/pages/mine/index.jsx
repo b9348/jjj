@@ -14,7 +14,7 @@ const midList = [
   { icon: CalendarOutline, content: '测试4' },
 ]
 const mineServices = [
-  {content: '资金明细', extra: '查看流水', url: '/mine/costDetails' },
+  {content: '资金详情', extra: '查看流水', url: '/mine/costDetails' },
   {content: '储值记录', extra: '查看充值记录', url: '/mine/chargeRecords' },
   {content: '联系客服' , extra: '咨询官方客服' },
   {content: '比赛记录', extra: '查看过往赛事结果', url: '/mine/matchRecords' },  

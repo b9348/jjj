@@ -1,62 +1,51 @@
-import { useState } from 'react';
-import { NavBar, Button, Toast, Form, Input, ImageUploader } from 'antd-mobile'
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { Button, Grid , NavBar } from 'antd-mobile' 
+import { queryDetails } from '../../../tool/api'
+import './index.less'
 
-import './index.less';
-
-const Charge = () => {
-    const [fileList, setFileList] = useState([]);
-    const [value, setValue] = useState(123);
-    const handleCopy = () => {
-        Toast.show({ duration: 500, content: '已复制！', })
+function App() {
+  const [cost, setCosts] = useState([])
+  const titleList = [{ title: '资金日期' }
+    , { title: '资金类型' }
+    , { title: '资金说明' }
+  ]
+  useEffect(() => {
+    const queryCostDetail = async () => {
+      const userId = localStorage.getItem('id')
+      const res = await queryDetails(userId)
+      setCosts(res.data)
+      console.log(res)
     }
-    return (
-        <div className="charge">
+    queryCostDetail()
+  }, [])
+  return (
+    <div className="chargeRecords">
+    <NavBar back='返回' onBack={() => { window.history.go(-1) }}            >
+        资金明细
+    </NavBar>
+      <div className="up">
+        {titleList.map((item, index) => {
+          return <div className="detailBox" key={index}>
+            {item.title}
+          </div>
+        })}
+      </div>
+      <div title='基础用法'>
+        <Grid columns={3} gap={8}>
+          <Grid.Item>
+            <div className='grid-demo-item-block'>A</div>
+          </Grid.Item>
+          <Grid.Item>
+            <div className='grid-demo-item-block'>B</div>
+          </Grid.Item>
+          <Grid.Item>
+            <div className='grid-demo-item-block' >C</div>
+          </Grid.Item>
+        </Grid>
+      </div>
+    </div>
+  )
+}
 
-            <NavBar back='返回' onBack={() => { window.history.go(-1) }}            >
-                充值方式
-            </NavBar>
-            <div className="chargeWrapper">
-                <CopyToClipboard text={value} onCopy={handleCopy}>
-                    <div className="chargeCopy" onClick={() => { handleCopy() }}>
-                        <p>点击此区域即可一键复制：
-                            <br />
-                            若无法一键复制，请长按手动选中并复制
-                            <br /><br />
-                            1. 支付宝支付</p>
-                    </div>
-                </CopyToClipboard>
-
-                <div className="chargeInput">
-                    <Form className='chargeForm' layout='horizontal'>
-                        <Form.Item label='充值账号' name='account'>
-                            <Input placeholder='请输入充值账号' clearable />
-                        </Form.Item>
-                        <Form.Item label='金额' name='cost'>
-                            <Input placeholder='请输入充值金额' clearable type='password' />
-                        </Form.Item>
-                        {/* 上传图片表单 */}
-
-                        <Form.Item label='上传图片' name='image'>
-                            {/* <Input placeholder='请上传充值凭证' clearable type='file' accept='image/*' multiple /> */}
-                            <ImageUploader
-                                multiple={false}
-                                maxCount={1}
-                                value={fileList}
-                                onChange={setFileList}
-                            />
-                        </Form.Item>
-
-                    </Form>
-                    <div className="chargeAddress"></div>
-                    <div className="chargeCost"></div>
-                    <div className="chargeUpload"></div>
-                </div>
-                <Button className="chargeBtn" color='primary' >确认充值</Button>
-            </div>
-        </div>
-
-    );
-};
-
-export default Charge;
+export default App
